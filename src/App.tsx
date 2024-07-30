@@ -1,9 +1,7 @@
+import Routers from './router'
+  
 function App() {
-  return (
-    <>
-      <div className="underline font-bold">测试</div>
-    </>
-  )
+  return <Routers />
 }
 
 export default App

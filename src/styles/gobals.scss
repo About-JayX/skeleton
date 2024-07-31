@@ -1,0 +1,194 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background: #000;
+  color: #fff;
+}
+
+.home-bg {
+  position: relative;
+  .home-bg-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/home/bg-1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 4.7rem;
+    height: 4.7rem;
+    z-index: 1;
+    animation: home-bg-1 2s ease-in-out infinite;
+    @keyframes home-bg-1 {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-0.5rem);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .home-bg-2 {
+    content: '';
+    position: absolute;
+    top: 4rem;
+    left: -2rem;
+    background-image: url('/home/bg-2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 9.6rem;
+    height: 13rem;
+    z-index: 1;
+  }
+  .home-bg-3 {
+    content: '';
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    background-image: url('/home/bg-3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 11rem;
+    height: 9rem;
+    z-index: 1;
+
+    animation: home-bg-2 2s ease-in-out infinite;
+    @keyframes home-bg-2 {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(0.5rem);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+.home-bg::after {
+  content: '';
+  position: absolute;
+  top: -25rem;
+  left: -2rem;
+  width: calc(100% + 3rem);
+  height: 100vh;
+  background: url('/home/bg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.5;
+  z-index: 0;
+  animation: home-bg 3s ease-in-out infinite;
+  @keyframes home-bg {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    top: -4rem;
+    height: 25rem;
+    background-size: cover;
+  }
+}
+
+.pi-war-home-logo {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/home/PiWarBg/PiwarLOGO1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: rotate-a 5s linear infinite;
+
+    @keyframes rotate-a {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/home/PiWarBg/PiwarLOGO2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: rotate-b 5s linear infinite;
+
+    @keyframes rotate-b {
+      from {
+        transform: rotate(360deg);
+      }
+      to {
+        transform: rotate(0deg);
+      }
+    }
+  }
+  .logo-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/home/PiWarBg/PiwarLOGO3.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+  }
+  .logo-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/home/PiWarBg/PiwarLOGO4.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+  }
+  .logo-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/home/PiWarBg/PiwarLOGO5.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+  }
+  .pi-war-bg::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url('/home/PiWarBg/bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+  }
+}

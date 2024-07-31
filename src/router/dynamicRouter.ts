@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-const views = import.meta.glob('../views/*/**/index.tsx')
+const views = import.meta.glob('../views/**/index.tsx')
 
 interface Iconig {
   default?: () => Promise<unknown>
@@ -12,16 +12,18 @@ interface Irouter {
   path: string
   element: any
 }
+
 const routers: Array<Irouter> = await Promise.all(
   Object.entries(views).map(async item => {
     let [src, element] = item
 
     const config = (await element()) as Iconig
 
-    let path = src
-      .replace('../views', '')
-      .replace('/index.tsx', '')
-      .toLocaleLowerCase()
+    let path =
+      src
+        .replace('../views', '')
+        .replace('/index.tsx', '')
+        .toLocaleLowerCase() || '/'
 
     if (config.routerConfig && config.routerConfig.params.length) {
       config.routerConfig.params.forEach(param => (path = path + `/:${param}?`))
@@ -37,5 +39,7 @@ const routers: Array<Irouter> = await Promise.all(
     }
   })
 )
+
+console.log(routers, '?')
 
 export default routers

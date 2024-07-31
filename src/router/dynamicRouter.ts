@@ -8,38 +8,39 @@ interface Iconig {
     params: Array<string>
   }
 }
-interface Irouter {
+export interface Irouter {
   path: string
   element: any
 }
 
-const routers: Array<Irouter> = await Promise.all(
-  Object.entries(views).map(async item => {
-    let [src, element] = item
+const generateRoutes = async (): Promise<Irouter[]> => {
+  return await Promise.all(
+    Object.entries(views).map(async item => {
+      let [src, element] = item
 
-    const config = (await element()) as Iconig
+      const config = (await element()) as Iconig
 
-    let path =
-      src
-        .replace('../views', '')
-        .replace('/index.tsx', '')
-        .toLocaleLowerCase() || '/'
+      let path =
+        src
+          .replace('../views', '')
+          .replace('/index.tsx', '')
+          .toLocaleLowerCase() || '/'
 
-    if (config.routerConfig && config.routerConfig.params.length) {
-      config.routerConfig.params.forEach(param => (path = path + `/:${param}?`))
-    }
+      if (config.routerConfig && config.routerConfig.params.length) {
+        config.routerConfig.params.forEach(
+          param => (path = path + `/:${param}?`)
+        )
+      }
 
-    return {
-      path,
-      element: lazy(
-        element as () => Promise<{
-          default: React.ComponentType<any>
-        }>
-      ),
-    }
-  })
-)
-
-console.log(routers, '?')
-
-export default routers
+      return {
+        path,
+        element: lazy(
+          element as () => Promise<{
+            default: React.ComponentType<any>
+          }>
+        ),
+      }
+    })
+  )
+}
+export default generateRoutes

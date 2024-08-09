@@ -17,6 +17,7 @@ const Page = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          "authorization": "222",
         },
         body: JSON.stringify(data),
       })
@@ -54,7 +55,7 @@ const Page = () => {
         const message = `BanDing wallet Address for ${type}, User is ${code}, Wallet Address is ${address.toLowerCase()}, Please confirm the sign`
         const signature = await web3.eth.personal.sign(message, address, '')
 
-        sendBindRequest({ address, code, signature, message, type })
+        sendBindRequest({ address, user: code, signature, message, type })
       } catch (error) {
         console.error(error)
       }
@@ -85,7 +86,7 @@ const Page = () => {
         type,
         signature,
         message: Array.from(encodedMessage),
-        code,
+        user: code,
       })
     } catch (error) {
       console.error(error)

@@ -3,7 +3,7 @@ import Button from './button'
 import Web3 from 'web3'
 
 const Page = () => {
-  const { type, code } = useParams()
+  const { type, code, token } = useParams()
   const bindWallet = () => {
     if (type === 'erc20') {
       bindERC20Wallet()
@@ -17,7 +17,7 @@ const Page = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "authorization": "222",
+          authorization: token || '',
         },
         body: JSON.stringify(data),
       })

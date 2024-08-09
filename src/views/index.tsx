@@ -9,6 +9,6 @@ const Main = () => {
 }
 
 export const routerConfig = {
-  params: ['type', 'code'],
+  params: ['type', 'code', 'token'],
 }
 export default Main

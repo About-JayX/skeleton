@@ -13,7 +13,7 @@ const Page = () => {
   }
   const sendBindRequest = async (data: any) => {
     try {
-      const response = await fetch('/authorize-Bind/bind-wallet', {
+      const response = await fetch('https://tbotapi.xdex.cc/authorize-Bind/bind-wallet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

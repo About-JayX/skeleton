@@ -1,9 +1,12 @@
 import { useParams } from 'react-router-dom'
 import Button from './button'
 import Web3 from 'web3'
+import { useTranslation } from 'react-i18next'
+import { message, message as Message } from 'antd'
 
 const Page = () => {
   const { type, code, token } = useParams()
+  const { t } = useTranslation()
   const bindWallet = () => {
     if (type === 'erc20') {
       bindERC20Wallet()
@@ -13,26 +16,29 @@ const Page = () => {
   }
   const sendBindRequest = async (data: any) => {
     try {
-      const response = await fetch('https://tbotapi.xdex.cc/authorize-Bind/bind-wallet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: token || '',
-        },
-        body: JSON.stringify(data),
-      })
+      const response = await fetch(
+        'https://tbotapi.xdex.cc/authorize-Bind/bind-wallet',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token || '',
+          },
+          body: JSON.stringify(data),
+        }
+      )
       const result = await response.json()
       if (result.success) {
-        alert(`${data.type.toUpperCase()} banding Success`)
+        message.success(`${data.type.toUpperCase()} ${t('base.bindSuccess')}`)
       } else {
-        alert(`${data.type.toUpperCase()} banding Error`)
+        message.error(`${data.type.toUpperCase()} ${t('base.bindErr')}`)
       }
     } catch (error) {
-      console.error(error)
-      alert('Server error, please try again later')
+      message.error(t('base.sError'))
     }
     window.open(`https://t.me/pidWarTest_bot/pidWar/`)
   }
+
   const bindERC20Wallet = async () => {
     if (window.ethereum) {
       const web3 = new Web3(window.ethereum)
@@ -57,10 +63,11 @@ const Page = () => {
 
         sendBindRequest({ address, user: code, signature, message, type })
       } catch (error) {
+        Message.error(t('base.bindErr'))
         console.error(error)
       }
     } else {
-      alert('Please install MetaMask, Bitget or OKX wallet')
+      Message.error(t('base.iErcWallet'))
     }
   }
   async function bindSolanaWallet() {
@@ -68,7 +75,7 @@ const Page = () => {
       const wallet = window.solana
 
       if (!wallet) {
-        alert('Please install Solana Wallet')
+        Message.error(t('base.iSolWallet'))
         return
       }
 
@@ -89,6 +96,7 @@ const Page = () => {
         user: code,
       })
     } catch (error) {
+      Message.error(t('base.bindErr'))
       console.error(error)
     }
   }
@@ -110,7 +118,7 @@ const Page = () => {
             绑定{type}钱包
           </Button>
         ) : (
-          <span className="mt-32 text-center">未选择绑定链</span>
+          <span className="mt-32 text-center">{t('base.notLink')}</span>
         )}
         {/* <Button>测试测</Button> */}
       </div>

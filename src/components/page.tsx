@@ -30,13 +30,13 @@ const Page = () => {
       const result = await response.json()
       if (result.success) {
         message.success(`${data.type.toUpperCase()} ${t('base.bindSuccess')}`)
+        window.open(`https://t.me/pidWarTest_bot/pidWar/`)
       } else {
         message.error(`${data.type.toUpperCase()} ${t('base.bindErr')}`)
       }
     } catch (error) {
       message.error(t('base.sError'))
     }
-    window.open(`https://t.me/pidWarTest_bot/pidWar/`)
   }
 
   const bindERC20Wallet = async () => {
